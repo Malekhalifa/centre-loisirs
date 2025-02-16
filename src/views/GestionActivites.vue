@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import { ajouterActivite, obtenirActivites } from "../services/firebase";
 
-
 const titre = ref("");
 const typeActivite = ref("");
 const cout = ref("");
@@ -90,13 +89,12 @@ onMounted(chargerActivites);
 
 <template>
   <div class="container">
-    
     <form @submit.prevent="ajouter">
       <div v-if="errorMsg" class="error-message">{{ errorMsg }}</div>
 
-      <div > 
-    <h2>Gestion des Activités</h2>
-  </div>
+      <div>
+        <h2>Gestion des Activités</h2>
+      </div>
 
       <label>Titre</label>
       <input v-model="titre" type="text" required />
@@ -108,10 +106,10 @@ onMounted(chargerActivites);
       <input v-model="cout" type="number" required />
 
       <label>Date</label>
-      <input v-model="date" type="date"  />
+      <input v-model="date" type="date" />
 
       <label>Heure</label>
-      <input v-model="heure" type="time"  />
+      <input v-model="heure" type="time" />
 
       <label>Description courte</label>
       <input v-model="descriptionCourte" type="text" required />
@@ -169,13 +167,13 @@ h2 {
   font-weight: bold;
 }
 
-
 label {
   display: block;
   margin-top: 10px;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 8px;
   margin-top: 5px;

@@ -1,12 +1,14 @@
-import { createRouter, createWebHistory,  } from 'vue-router'; 
-
-import AccueilCentre from '../pages/AccueilCentre.vue';
-import TableauBordAdmin from '../pages/TableauBordAdmin.vue';
+import PageConnexionAdmin from '@/views/PageConnexionAdmin.vue';
+import { createRouter, createWebHistory, } from 'vue-router';
 import GestionActivites from '@/views/GestionActivites.vue';
-import PageConnexion from '@/views/PageConnexion.vue';
 import PageInscription from '@/views/PageInscription.vue';
-import Panier from '../components/Panier.vue';
+import PageConnexion from '@/views/PageConnexion.vue';
+
+import TableauBordAdmin from '../pages/TableauBordAdmin.vue';
 import CarteActivite from '../components/CarteActivite.vue';
+import AccueilCentre from '../pages/AccueilCentre.vue';
+import Panier from '../components/Panier.vue';
+
 
 const routes = [ 
   { 
@@ -24,6 +26,11 @@ const routes = [
     path: "/PageConnexion", 
     component: PageConnexion,
     name: 'PageConnexion'
+  },
+  { 
+    path: "/PageConnexionAdmin", 
+    component: PageConnexionAdmin,
+    name: 'PageConnexionAdmin'
   },
   { 
     path: "/PageInscription", 

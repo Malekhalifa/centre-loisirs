@@ -1,6 +1,6 @@
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/firebaseConfig";
 
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 // Fonction pour inscrire un utilisateur
 export const inscription = async (email, password) => {
@@ -33,6 +33,20 @@ export const deconnexion = async () => {
     console.log("Utilisateur déconnecté");
   } catch (error) {
     console.error("Erreur lors de la déconnexion :", error.message);
+    throw error;
+  }
+};
+
+export const connexionAdmin = async (username, password) => {
+  const adminUsername = "admin";
+  const adminPassword = "admin";
+
+  if (username === adminUsername && password === adminPassword) {
+    console.log("Administrateur authentifié");
+    return { username: adminUsername };
+  } else {
+    const error = new Error("Nom d'utilisateur ou mot de passe incorrect");
+    console.error("Erreur lors de l'authentification de l'administrateur :", error.message);
     throw error;
   }
 };

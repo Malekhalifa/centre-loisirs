@@ -3,15 +3,19 @@ import { ref } from "vue";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
 
 const email = ref("");
 const password = ref("");
 const errorMsg = ref("");
 const router = useRouter();
+const authStore = useAuthStore();
 
 const handleConnexion = async () => {
   try {
     await signInWithEmailAndPassword(auth, email.value, password.value);
+
+    authStore.login("adherant");
     router.push("/"); // Redirige vers l'accueil après connexion
   } catch (error) {
     console.error(error);

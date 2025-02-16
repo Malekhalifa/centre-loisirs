@@ -43,6 +43,7 @@ const props = defineProps({
 });
 
 
+
 const formatDate = (date) => {
   if (!date || !date.seconds) {
     return 'Date invalide';
@@ -86,6 +87,8 @@ const estDansPanier = (id) => {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   width: 100%;
   max-width: 350px;
+  position: relative;
+  padding-bottom: 36px;
 }
 
 .card:hover {
@@ -174,6 +177,11 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  width: 90%;
+  transform: translateX(-50%);
 }
 
 button:hover {
