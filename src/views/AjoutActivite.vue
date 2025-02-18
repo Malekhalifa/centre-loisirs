@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { ajouterActivite, obtenirActivites } from "../services/firebase";
+import { ref } from "vue";
+import { ajouterActivite } from "../services/firebase";
 
 const titre = ref("");
 const typeActivite = ref("");
@@ -68,23 +68,14 @@ const ajouter = async () => {
     ageAutorise.value = "";
     tailleAutorisee.value = "";
     errorMsg.value = "";
-    chargerActivites();
+    window.history.back();
   } catch (error) {
     console.error("Erreur lors de l'ajout :", error);
     errorMsg.value = "Une erreur est survenue lors de l'ajout.";
   }
 };
 
-const chargerActivites = async () => {
-  try {
-    activites.value = await obtenirActivites();
-  } catch (error) {
-    console.error("Erreur lors du chargement des activités :", error);
-    errorMsg.value = "Impossible de charger les activités.";
-  }
-};
 
-onMounted(chargerActivites);
 </script>
 
 <template>

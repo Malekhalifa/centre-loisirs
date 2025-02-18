@@ -1,11 +1,12 @@
 import PageConnexionAdmin from '@/views/PageConnexionAdmin.vue';
 import { createRouter, createWebHistory, } from 'vue-router';
-import GestionActivites from '@/views/GestionActivites.vue';
 import PageInscription from '@/views/PageInscription.vue';
 import PageConnexion from '@/views/PageConnexion.vue';
 
 import TableauBordAdmin from '../pages/TableauBordAdmin.vue';
 import CarteActivite from '../components/CarteActivite.vue';
+import ModifieActivite from '../views/ModifieActivite.vue';
+import AjoutActivite from '../views/AjoutActivite.vue';
 import AccueilCentre from '../pages/AccueilCentre.vue';
 import Panier from '../components/Panier.vue';
 
@@ -38,9 +39,15 @@ const routes = [
     name: 'PageInscription'
   },
   { 
-    path: "/GestionActivites", 
-    component: GestionActivites,
-    name: 'GestionActivites'
+    path: "/AjoutActivite", 
+    component: AjoutActivite,
+    name: 'AjoutActivite'
+  },
+  { 
+    path: "/ModifieActivite/:id", 
+    component: ModifieActivite,
+    name: 'ModifieActivite',
+    props: true
   },
   { 
     path: "/panier", 
@@ -51,8 +58,7 @@ const routes = [
   {
     path: '/CarteActivite/:id',
     name: 'CarteActivite',
-    component: CarteActivite,
-    props: (route) => ({ id: route.query.id })
+    component: CarteActivite
   }
 ];
 

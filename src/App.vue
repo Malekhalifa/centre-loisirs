@@ -19,8 +19,6 @@ export default {
       }
       authStore.logout();
     };
-    console.log(isUserAuthenticated.value);
-    
     return {
       isUserAuthenticated,
       isAdmin,

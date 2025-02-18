@@ -4,20 +4,20 @@
     <div class="card-content">
       <div v-if="activite">
         <h3 class="card-title">{{ activite.titre }}</h3>
-        <p class="card-type">{{ activite.type_activite }}</p>
-        <p class="card-cout">{{ activite.cout }} $</p>
-        <p class="card-date">{{ formatDate(activite.date) }}</p>
-        <p class="card-heure">{{ activite.heure }}</p>
-        <p class="card-lieu">{{ activite.lieu }}</p>
-        <p class="card-description-courte">{{ activite.description_courte }}</p>
-        <p class="card-description">{{ activite.description }}</p>
+        <!-- <p class="card-description-courte">"{{ activite.description_courte }}"</p> -->
+        <div class="card-info-grid">
+          <p><strong>Type:</strong> {{ activite.type_activite }}</p>
+          <p><strong>Coût:</strong> <span class="highlight">{{ activite.cout }} $</span></p>
+          <p><strong>Date:</strong> {{ formatDate(activite.date) }} - {{ activite.heure }}</p>
+          <p><strong>Lieu:</strong> {{ activite.lieu }}</p>
+        </div>
+        <p class="card-description"><strong>Description:</strong> {{ activite.description }}</p>
         <ul class="card-details">
           <li><strong>Équipement :</strong> {{ activite.equipement ? activite.equipement.join(", ") : 'Aucun équipement' }}</li>
           <li><strong>Saison :</strong> {{ activite.saison }}</li>
           <li><strong>Âge autorisé :</strong> {{ activite.age_autorise }}</li>
           <li><strong>Taille autorisée :</strong> {{ activite.taille_autorisee }}</li>
         </ul>
-        <!-- Bouton dynamique -->
         <button @click="ajouterAuPanier(activite)">
           {{ estDansPanier(activite.id) ? "Supprimer du panier" : "Ajouter au panier" }}
         </button>
@@ -42,43 +42,41 @@ const props = defineProps({
   }
 });
 
-
-
 const formatDate = (date) => {
-  if (!date || !date.seconds) {
+  if (!date) {
     return 'Date invalide';
   }
-  
-  // Convert Firestore Timestamp to JavaScript Date
-  const formattedDate = new Date(date.seconds * 1000); 
 
-  // Ensure the date is valid
+  let formattedDate;
+
+  if (date.seconds) {
+    formattedDate = new Date(date.seconds * 1000);
+  } else {
+    formattedDate = new Date(date);
+  }
+
   if (isNaN(formattedDate.getTime())) {
     return 'Date invalide';
   }
 
-  // Format the date
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return formattedDate.toLocaleDateString('fr-FR', options);
 };
 
-
 const ajouterAuPanier = (activite) => {
   if (estDansPanier(activite.id)) {
-    panierStore.supprimerActivite(activite.id); // Supprime si déjà ajouté
+    panierStore.supprimerActivite(activite.id);
   } else {
-    panierStore.ajouterActivite(activite); // Ajoute au panier
+    panierStore.ajouterActivite(activite);
   }
-
 };
 
 const estDansPanier = (id) => {
-  return panierStore.activites.some(a => a.id === id); // Vérifie si l'activité est déjà dans le panier
+  return panierStore.activites.some(a => a.id === id);
 };
 </script>
 
 <style scoped>
-/* --- Cartes d'activités --- */
 .card {
   background: #ffffff;
   border-radius: 10px;
@@ -96,14 +94,12 @@ const estDansPanier = (id) => {
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Image de la carte --- */
 .card-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-/* --- Contenu de la carte --- */
 .card-content {
   padding: 15px;
   text-align: left;
@@ -112,50 +108,15 @@ const estDansPanier = (id) => {
 .card-title {
   font-size: 1.4rem;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
-.card-type {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-}
 
-.card-cout {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-}
 
-.card-date {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-.card-heure {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-.card-lieu {
-  font-size: 0.9rem;
-  color: #777;
-  margin-bottom: 5px;
-}
-
-.card-description-courte {
+.card-description-courte, .card-description {
   font-size: 1rem;
   color: #333;
   margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.card-description {
-  font-size: 1rem;
-  color: #333;
-  margin-top: 5px;
   margin-bottom: 10px;
 }
 
@@ -170,7 +131,7 @@ const estDansPanier = (id) => {
 }
 
 button {
-  background-color: #007bff; /* Couleur de votre choix */
+  background-color: #007bff;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -185,6 +146,11 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3; /* Couleur plus foncée au survol */
+  background-color: #0056b3;
+}
+
+.highlight {
+  color: #ff0000;
+  font-weight: bold;
 }
 </style>
