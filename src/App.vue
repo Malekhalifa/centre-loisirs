@@ -35,7 +35,7 @@ export default {
     <router-link v-if="!isUserAuthenticated" to="/PageConnexion">Se connecter </router-link> 
     <router-link v-if="!isUserAuthenticated" to="/PageConnexionAdmin">Se connecter (admin) </router-link> 
     <router-link v-if="!isUserAuthenticated" to="/PageInscription">S'inscrire </router-link> 
-    <router-link v-if="!isAdmin" to="/panier">Panier </router-link>
+    <router-link v-if="!isAdmin" to="/Panier">Panier </router-link>
     <router-link v-if="isUserAuthenticated" @click.prevent="handleLogout" to="*">Déconnecter </router-link> 
   </nav>
   <router-view/>

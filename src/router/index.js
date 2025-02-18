@@ -1,5 +1,5 @@
 import PageConnexionAdmin from '@/views/PageConnexionAdmin.vue';
-import { createRouter, createWebHistory, } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import PageInscription from '@/views/PageInscription.vue';
 import PageConnexion from '@/views/PageConnexion.vue';
 
@@ -11,7 +11,7 @@ import AccueilCentre from '../pages/AccueilCentre.vue';
 import Panier from '../components/Panier.vue';
 
 
-const routes = [ 
+const routes = [
   { 
     path: "/", 
     component: AccueilCentre,
@@ -54,7 +54,6 @@ const routes = [
     component: Panier,
     name: 'Panier',
   },
-
   {
     path: '/CarteActivite/:id',
     name: 'CarteActivite',

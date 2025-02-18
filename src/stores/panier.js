@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+
 export const usePanierStore = defineStore('panier', {
   state: () => ({
     activites: []

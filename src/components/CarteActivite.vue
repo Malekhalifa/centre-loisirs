@@ -13,7 +13,7 @@
         </div>
         <p class="card-description"><strong>Description:</strong> {{ activite.description }}</p>
         <ul class="card-details">
-          <li><strong>Équipement :</strong> {{ activite.equipement ? activite.equipement.join(", ") : 'Aucun équipement' }}</li>
+          <li><strong>Équipement :</strong> {{ Array.isArray(activite.equipement) ? activite.equipement.join(", ") : activite.equipement || 'Aucun équipement' }}</li>
           <li><strong>Saison :</strong> {{ activite.saison }}</li>
           <li><strong>Âge autorisé :</strong> {{ activite.age_autorise }}</li>
           <li><strong>Taille autorisée :</strong> {{ activite.taille_autorisee }}</li>
